@@ -1,3 +1,5 @@
+#include "transform.h"
+
 struct doge_actor
 {
 	struct doge_transform transform;
@@ -7,4 +9,4 @@ struct doge_actor
 
 	void (*start)(struct doge_actor *);
 	void (*tick)(struct doge_actor *);
-}
+};
