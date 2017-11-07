@@ -10,7 +10,6 @@ struct doge_vec2* sum_vec2(struct doge_vec2* a,struct doge_vec2* b)
     v->y = a->y+b->y;
     return v;
 }
-
 struct doge_vec2* sub_vec2(struct doge_vec2* a,struct doge_vec2* b)
 {
     struct doge_vec2* v = malloc(sizeof(struct doge_vec2));
@@ -18,7 +17,6 @@ struct doge_vec2* sub_vec2(struct doge_vec2* a,struct doge_vec2* b)
     v->y = a->y-b->y;
     return v;
 }
-
 struct doge_vec2* scale_vec2(struct doge_vec2* a, struct doge_vec2* b)
 {
     struct doge_vec2* v = malloc(sizeof(struct doge_vec2));
@@ -38,6 +36,13 @@ float distance_vec2(struct doge_vec2* a,struct doge_vec2* b)
 {
     struct doge_vec2* c = sub_vec2(a,b);
     return slow_len_vec2(c);
+}
+int normalize_vec2(struct doge_vec2* a)
+{
+    float a_len = slow_len_vec2(a);
+    a->x = a->x / a_len;
+    a->y = a->y / a_len;
+    return 0;
 }
 
 
@@ -80,3 +85,12 @@ float distance_vec3(struct doge_vec3* a, struct doge_vec3* b)
     struct doge_vec3* c = sub_vec3(a,b);
     return slow_len_vec3(c);
 }
+int normalize_vec3(struct doge_vec3* a)
+{
+    float a_len = slow_len_vec3(a);
+    a->x = a->x / a_len;
+    a->y = a->y / a_len;
+    a->z = a->z / a_len;
+    return 0;
+}
+

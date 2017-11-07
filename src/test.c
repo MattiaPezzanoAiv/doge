@@ -96,6 +96,23 @@ int test_distance_vec2() //ok
     free(a);free(b);
     return ret;
 }
+int test_normalize_vec2()
+{
+    struct doge_vec2* a = malloc(sizeof(struct doge_vec2));
+    a->x = 10;
+    a->y = 6;
+    int ret = 1;
+    normalize_vec2(a); //expected x = 0.857 y = 0.514
+    if(a->x >= 0.856 && a->x <= 0.858 && a->y >= 0.513 && a->y <= 0.515)
+        ret = 0;
+    free(a);
+    return ret;
+}
+
+
+
+
+
 //VECTOR 3
 int test_sum_vec3() //ok
 {
@@ -195,6 +212,19 @@ int test_distance_vec3()
     free(a);free(b);
     return ret;
 }
+int test_normalize_vec3()
+{
+    struct doge_vec3* a = malloc(sizeof(struct doge_vec3));
+    a->x = 10;
+    a->y = 6;
+    a->z = 45;
+    int ret = 1;
+    normalize_vec3(a); //expected x = 0.215 y = 0.129 z = 0.968
+    if(a->x >= 0.214 && a->x <= 0.216 && a->y >= 0.128 && a->y <= 0.130 && a->z >= 0.967 && a->z <= 0.969)
+        ret = 0;
+    free(a);
+    return ret;
+}
 int main(int argsCount, char* args[])
 {
     //vector2
@@ -204,6 +234,7 @@ int main(int argsCount, char* args[])
     test(test_slow_len_vec2);
     test(test_fast_len_vec2);
     test(test_distance_vec2);
+    test(test_normalize_vec2);
 
 
     //vector3
