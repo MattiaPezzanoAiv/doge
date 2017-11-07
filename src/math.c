@@ -30,8 +30,16 @@ float slow_len_vec2(struct  doge_vec2* a)
 {
    return (float)sqrt(pow(a->x,2)+pow(a->y,2));
 }
+float fast_len_vec2(struct doge_vec2* a)
+{
+   return (pow(a->x,2)+pow(a->y,2));
+}
+float distance_vec2(struct doge_vec2* a,struct doge_vec2* b)
+{
+    struct doge_vec2* c = sub_vec2(a,b);
+    return slow_len_vec2(c);
+}
 
-// float distance_vec2(struct doge_vec2*, struct doge_vec2*);
 
 
 //VECTOR 3
@@ -63,7 +71,12 @@ float slow_len_vec3(struct  doge_vec3* a)
 {
    return (float)sqrt(pow(a->x,2)+pow(a->y,2)+pow(a->z,2));
 }
-// float distance_vec3(struct doge_vec3* a, struct doge_vec3* b)
-// {
-
-// }
+float fast_len_vec3(struct doge_vec3* a)
+{
+   return (pow(a->x,2)+pow(a->y,2)+pow(a->z,2));
+}
+float distance_vec3(struct doge_vec3* a, struct doge_vec3* b)
+{
+    struct doge_vec3* c = sub_vec3(a,b);
+    return slow_len_vec3(c);
+}

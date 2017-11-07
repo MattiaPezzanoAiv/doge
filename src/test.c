@@ -49,7 +49,6 @@ int test_scale_vec2() //ok
 	b->y = 9;
 	
 	struct doge_vec2* result = scale_vec2(a,b);
-    fprintf(stdout,"%f    %f  \n",result->x,result->y);
     int ret = 1;
     if(result->x == 15 && result->y == 18)
         ret = 0;
@@ -57,7 +56,7 @@ int test_scale_vec2() //ok
         free(result);
     return ret;
 }
-int test_slow_len_vec2()
+int test_slow_len_vec2() //ok
 {
     struct doge_vec2* a = malloc(sizeof(struct doge_vec2));
     a->x = 10;
@@ -70,8 +69,33 @@ int test_slow_len_vec2()
     free(a);
     return ret;
 }
-
-
+int test_fast_len_vec2() //ok
+{
+    struct doge_vec2* a = malloc(sizeof(struct doge_vec2));
+    a->x = 10;
+    a->y = 6;
+    int ret = 1;
+    float len = fast_len_vec2(a);
+    if(len <= 136.001 && len >= 135.999) //error margin
+        ret =    0;
+    free(a);
+    return ret;
+}
+int test_distance_vec2() //ok
+{
+    struct doge_vec2* a = malloc(sizeof(struct doge_vec2));
+    a->x = 18;
+    a->y = 24;
+    struct doge_vec2* b = malloc(sizeof(struct doge_vec2));
+    b->x = -5;
+    b->y = -87;
+    int ret = 1;
+    float dist = distance_vec2(a,b); //113.357
+    if(dist >= 113.356 && dist <= 113.358)
+        ret = 0;
+    free(a);free(b);
+    return ret;
+}
 //VECTOR 3
 int test_sum_vec3() //ok
 {
@@ -128,7 +152,7 @@ int test_scale_vec3() //ok
         free(result);
     return ret;
 }
-int test_slow_len_vec3()
+int test_slow_len_vec3() //ok
 {
     struct doge_vec3* a = malloc(sizeof(struct doge_vec3));
     a->x = 10;
@@ -136,10 +160,39 @@ int test_slow_len_vec3()
     a->z = 45;
     int ret = 1;
     float len = slow_len_vec3(a);
-    fprintf(stdout,"%f \n",len);
     if(len <= 46.487 && len >= 46.485) //error margin
         ret =    0;
     free(a);
+    return ret;
+}
+int test_fast_len_vec3() //ok
+{
+    struct doge_vec3* a = malloc(sizeof(struct doge_vec3));
+    a->x = 10;
+    a->y = 6;
+    a->z = 45;
+    int ret = 1;
+    float len = fast_len_vec3(a);
+    if(len <= 2161.001 && len >= 2160.999) //error margin
+        ret =    0;
+    free(a);
+    return ret;
+}
+int test_distance_vec3()
+{
+    struct doge_vec3* a = malloc(sizeof(struct doge_vec3));
+    a->x = 18;
+    a->y = 24;
+    a->z = 9;
+    struct doge_vec3* b = malloc(sizeof(struct doge_vec3));
+    b->x = -5;
+    b->y = -87;
+    b->z = 11;
+    int ret = 1;
+    float dist = distance_vec3(a,b); //113.375
+    if(dist >= 113.374 && dist <= 113.376)
+        ret = 0;
+    free(a);free(b);
     return ret;
 }
 int main(int argsCount, char* args[])
@@ -149,11 +202,17 @@ int main(int argsCount, char* args[])
     test(test_sub_vec2);
     test(test_scale_vec2);
     test(test_slow_len_vec2);
+    test(test_fast_len_vec2);
+    test(test_distance_vec2);
 
 
     //vector3
     test(test_sum_vec3);
     test(test_sub_vec3);
     test(test_scale_vec3);
+    test(test_slow_len_vec3);
+    test(test_fast_len_vec3);
+
+
     fprintf(stdout,"All tests passed \n");
 }
