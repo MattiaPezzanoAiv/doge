@@ -1,4 +1,5 @@
 #include "../include/transform.h"
+#ifndef "../include/math.h" #include "../include/math.h"
 #include <string.h>
 
 int transform_init_2(struct doge_transform* t, struct doge_vec2 location, struct doge_vec2 scale)

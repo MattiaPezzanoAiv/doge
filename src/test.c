@@ -1,6 +1,8 @@
 #include "../include/transform.h"
-#include "../include/actor.h"
+// #include "../include/actor.h"
 #include "../include/test.h"
+#include "../include/math.h"
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -255,21 +257,21 @@ int test_new_transform()
 }
 
 //ACTOR
-int test_new_actor_name_default()
-{
-    struct doge_actor* actor = new_actor(NULL);
-    int ret = 1;
-    if(strcmp(actor->name, "default"))
-        ret = 0;
-    free(actor);
-    return ret;
-}
+// int test_new_actor_name_default()
+// {
+//     struct doge_actor* actor = new_actor(NULL);
+//     int ret = 1;
+//     if(strcmp(actor->name, "default"))
+//         ret = 0;
+//     free(actor);
+//     return ret;
+// }
 
 int main(int argsCount, char* args[])
 {
 
     //actor
-    test(test_new_actor_name_default);
+    // test(test_new_actor_name_default);
 
     //transform
     test_transform_init2();

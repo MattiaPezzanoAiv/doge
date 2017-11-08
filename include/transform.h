@@ -1,5 +1,7 @@
 
 #include <stdlib.h>
+#include "../include/math.h"
+
 
 struct doge_transform
 {
