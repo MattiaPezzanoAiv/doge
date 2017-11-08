@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 
+
 #define test(x) if (x())                                                                                     \
 {                                                                                                        \
     fprintf(stderr, "test failed while running function " #x "() at address %p line %d\n", x, __LINE__); \

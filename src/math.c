@@ -1,4 +1,7 @@
+#ifndef math_h
+#define math_h 
 #include "../include/math.h"
+#endif
 #include <stdlib.h>
 #include <math.h>
 

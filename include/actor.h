@@ -1,3 +1,4 @@
+#pragma once
 #include "transform.h"
 
 struct doge_actor
