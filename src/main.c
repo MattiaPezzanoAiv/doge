@@ -1,5 +1,5 @@
 #include <include/doge.h>
-#include "math.c"
+// #include "math.c"
 
 // struct doge_engine doge;
 

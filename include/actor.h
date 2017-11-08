@@ -10,3 +10,5 @@ struct doge_actor
 	void (*start)(struct doge_actor *);
 	void (*tick)(struct doge_actor *);
 };
+
+struct doge_actor* new_actor(int* );

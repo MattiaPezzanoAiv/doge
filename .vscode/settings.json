@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "actor.h": "c",
+        "test.h": "c"
+    }
+}
