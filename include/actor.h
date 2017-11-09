@@ -13,3 +13,6 @@ struct doge_actor
 };
 
 struct doge_actor* new_actor(int* );
+
+int doge_actor_tick(struct doge_actor*);
+int doge_actor_start(struct doge_actor*);

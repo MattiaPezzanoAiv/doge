@@ -1,6 +1,6 @@
 
-#include "../include/transform.h"
-// #include "../include/actor.h"
+#include "transform.c"
+#include "actor.c"
 #include "../include/test.h"
 
 #include "math.c"
@@ -219,52 +219,50 @@ int test_normalize_vec3()
 }
 
 
-//call dlsym
-//
 
 //TRANSFORM
-// int test_transform_init2()
-// {
-//     struct doge_transform* t = malloc(sizeof(struct doge_transform));
-//     struct doge_vec2* pippo = malloc(sizeof(struct doge_vec2));
-//     pippo->x = 100;pippo->y=100;
-//     struct doge_vec2* pippo2 = malloc(sizeof(struct doge_vec2));
-//     pippo2->x = 25;
+int test_transform_init2()
+{
+    struct doge_transform* t = malloc(sizeof(struct doge_transform));
+    struct doge_vec2* pippo = malloc(sizeof(struct doge_vec2));
+    pippo->x = 100;pippo->y=100;
+    struct doge_vec2* pippo2 = malloc(sizeof(struct doge_vec2));
+    pippo2->x = 25;
     
-//     transform_init_2(t,*pippo,*pippo2);
-//     int ret = 0;
-//     if(t->location.vec2.x != 100.00 || t->scale.vec2.x != 25.00)
-//         ret = -1;
-//     return ret;
-// }
-// int test_new_transform()
-// {
-//     struct doge_transform* t = new_transform();
-//     if(!t)
-//         return -1;
-//     return 0;
-// }
+    transform_init_2(t,*pippo,*pippo2);
+    int ret = 0;
+    if(t->location.vec2.x != 100.00 || t->scale.vec2.x != 25.00)
+        ret = -1;
+    return ret;
+}
+int test_new_transform()
+{
+    struct doge_transform* t = new_transform();
+    if(!t)
+        return -1;
+    return 0;
+}
 
 //ACTOR
-// int test_new_actor_name_default()
-// {
-//     struct doge_actor* actor = new_actor(NULL);
-//     int ret = 1;
-//     if(strcmp(actor->name, "default"))
-//         ret = 0;
-//     free(actor);
-//     return ret;
-// }
+int test_new_actor_name_default()
+{
+    struct doge_actor* actor = new_actor(NULL);
+    int ret = 1;
+    if(strcmp(actor->name, "default0"))  //remember 0 at the end
+        ret = 0;
+    free(actor);
+    return ret;
+}
 
 int main(int argsCount, char* args[])
 {
 
     //actor
-    // test(test_new_actor_name_default);
+    test(test_new_actor_name_default);
 
     //transform
-    // test_transform_init2();
-    // test_new_transform();
+    test_transform_init2();
+    test_new_transform();
 
 
     //vector2
