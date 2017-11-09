@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include "../include/actor.h"
 
-struct doge_engine doge_new_engine()
+struct doge_engine* doge_new_engine()
 {
     //return new doge engine and init it
     struct doge_engine* engine = malloc(sizeof(struct doge_engine));
-
+    return engine;
 } 
 
 int doge_spawn_actor(struct doge_engine* engine,struct doge_actor* actor)  //like list append
@@ -22,4 +22,5 @@ int doge_spawn_actor(struct doge_engine* engine,struct doge_actor* actor)  //lik
         actor->prev = engine->actor_tail;
         engine->actor_tail = actor;
     }
+    return 0;
 }

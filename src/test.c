@@ -2,7 +2,7 @@
 #include "transform.c"
 #include "actor.c"
 #include "../include/test.h"
-
+#include "engine.c"
 #include "math.c"
 
 #include <stdlib.h>
@@ -248,15 +248,64 @@ int test_new_actor_name_default()
 {
     struct doge_actor* actor = new_actor(NULL);
     int ret = 1;
-    if(strcmp(actor->name, "default0"))  //remember 0 at the end
+    if(!strcmp(actor->name, "default"))  //remember 0 at the end
         ret = 0;
     free(actor);
+    return ret;
+}
+
+//ENGINE
+int test_engine_add_actor()
+{
+    int ret = 0;
+    struct doge_engine* engine = doge_new_engine();
+    if(!engine)
+    ret = 1;
+
+    struct doge_actor* actor = new_actor(NULL);
+    if(!actor) ret = 1;
+    actor->name = "cazzo";
+
+    doge_spawn_actor(engine,actor);
+    if(engine->actor_head != actor)
+    ret = 1;
+
+    free(engine);free(actor);
+    return ret;
+}
+int test_engine_add_actor2()
+{
+    int ret = 0;
+    struct doge_engine* engine = doge_new_engine();
+    if(!engine)
+    ret = 1;
+
+    struct doge_actor* actor = new_actor(NULL);
+    if(!actor) ret = 1;
+    actor->name = "cazzo";
+
+    struct doge_actor* actor2 = new_actor(NULL);
+    if(!actor2) ret = 1;
+    actor2->name = "cazzo2";
+
+    doge_spawn_actor(engine,actor);
+    doge_spawn_actor(engine,actor2);
+    if(engine->actor_tail != actor2)
+        ret = 1;
+    if(actor->next != actor2)
+        ret = 1;
+    if(actor2->prev != actor)
+        ret = 1;
+
     return ret;
 }
 
 int main(int argsCount, char* args[])
 {
 
+    //engine
+    test(test_engine_add_actor);
+    test(test_engine_add_actor2);
     //actor
     test(test_new_actor_name_default);
 
