@@ -1,6 +1,7 @@
 
 #include "../include/actor.h"
 #include "../include/transform.h"
+#include "../include/component.h"
 
 struct doge_actor* new_actor(int* err_code)
 {
@@ -13,20 +14,23 @@ struct doge_actor* new_actor(int* err_code)
     }
     struct doge_transform t = *new_transform();
     actor->transform = t;
-
     actor->name = "default";
-    actor->start = (void*)(struct doge_actor*)doge_actor_start;
-    actor->tick = (void*)(struct doge_actor*)doge_actor_tick;
+
+
     return actor;
 }
-
-int doge_actor_start(struct doge_actor* actor)
+int add_component(struct doge_actor* actor,struct doge_component* comp)
 {
-    fprintf(stdout,"start \n");
-    return 0;
-}
-int doge_actor_tick(struct doge_actor* actor)
-{
-    fprintf(stdout,"tick \n");
+    if(actor->component_head == NULL) //list is empty
+    {
+        actor->component_head = comp;
+        actor->component_tail = comp;        
+    }
+    else
+    {
+        actor->component_tail->next = comp;
+        comp->prev = actor->component_tail;
+        actor->component_tail = comp;
+    }
     return 0;
 }

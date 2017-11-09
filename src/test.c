@@ -4,6 +4,7 @@
 #include "../include/test.h"
 #include "engine.c"
 #include "math.c"
+#include "component.c"
 
 #include <stdlib.h>
 #include <string.h>
@@ -299,13 +300,31 @@ int test_engine_add_actor2()
 
     return ret;
 }
+int test_engine_components()
+{
+    int ret = 0;
+    struct doge_engine* engine = doge_new_engine();
+    if(!engine)
+    ret = 1;
 
+    struct doge_actor* actor = new_actor(NULL);
+    if(!actor) ret = 1;
+    actor->name = "cazzo";
+    struct doge_component* c1 = doge_new_component(example_component_start,example_component_tick);
+    add_component(actor,c1);
+    doge_spawn_actor(engine,actor);
+    doge_update_actors(engine);
+    return 0;
+}
+#include <SDL.h>
 int main(int argsCount, char* args[])
 {
+    
 
     //engine
     test(test_engine_add_actor);
     test(test_engine_add_actor2);
+    test(test_engine_components);
     //actor
     test(test_new_actor_name_default);
 
