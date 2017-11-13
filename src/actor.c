@@ -3,6 +3,19 @@
 #include "../include/transform.h"
 #include "../include/component.h"
 
+struct doge_actor* new_actor_bitmap(int* err_code, char* bitmap_path) 
+{
+    struct doge_actor* actor = new_actor(err_code);
+    if(!actor) //error
+    {
+        if(err_code != NULL)
+            *err_code = -1;
+        return NULL;
+    }
+    actor->surface_bitmap = SDL_LoadBMP(bitmap_path);
+    return actor;
+}
+
 struct doge_actor* new_actor(int* err_code)
 {
     struct doge_actor* actor = malloc(sizeof(struct doge_actor));
@@ -15,7 +28,6 @@ struct doge_actor* new_actor(int* err_code)
     struct doge_transform t = *new_transform();
     actor->transform = t;
     actor->name = "default";
-
 
     return actor;
 }

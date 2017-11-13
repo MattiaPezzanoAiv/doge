@@ -7,6 +7,7 @@
 #include "component.c"
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 
@@ -254,6 +255,16 @@ int test_new_actor_name_default()
     free(actor);
     return ret;
 }
+int test_new_actor_bitmap_nocrash()
+{
+    int ret = 0;
+     struct doge_actor* actor = new_actor_bitmap(NULL,"../img/pippo.bmp");
+    if(!actor->surface_bitmap)
+        ret = 1;
+ 
+    free(actor);
+    return ret;
+}
 
 //ENGINE
 int test_engine_add_actor()
@@ -316,10 +327,51 @@ int test_engine_components()
     doge_update_actors(engine);
     return 0;
 }
+#ifdef _WIN32
 #include <SDL.h>
+#else
+#include <SDL2/SDL.h>
+#endif
 int main(int argsCount, char* args[])
 {
+    // SDL_Window* win = SDL_CreateWindow("pippo",100,100,400,400,0);
+    // SDL_Renderer* renderer;
+    // SDL_Texture *bitmapTex = NULL;
+    // SDL_Surface *bitmapSurface = NULL;
+
+    // renderer = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
     
+    // bitmapSurface = SDL_LoadBMP("../img/pippo.bmp");
+    // bitmapTex = SDL_CreateTextureFromSurface(renderer, bitmapSurface);
+    // SDL_FreeSurface(bitmapSurface);
+    // SDL_Rect position;
+    // position.x = 100;
+    // position.y = 100;
+    // position.w=100;
+    // position.h=100;
+    
+
+    // while (1) {
+    //     SDL_Event e;
+    //     if (SDL_PollEvent(&e)) {
+    //         if (e.type == SDL_QUIT) {
+    //             break;
+    //         }
+    //     }
+
+    //     SDL_RenderClear(renderer);
+    //     SDL_RenderCopy(renderer, bitmapTex, NULL, &position);
+    //     SDL_RenderPresent(renderer);
+    // }
+
+    // SDL_DestroyTexture(bitmapTex);
+    // SDL_DestroyRenderer(renderer);
+    // SDL_DestroyWindow(win);
+
+    // SDL_Quit();
+
+    // return 0;
+
 
     //engine
     test(test_engine_add_actor);
@@ -327,6 +379,7 @@ int main(int argsCount, char* args[])
     test(test_engine_components);
     //actor
     test(test_new_actor_name_default);
+    test(test_new_actor_bitmap_nocrash);
 
     //transform
     test_transform_init2();
